@@ -1,0 +1,11 @@
+streamlit
+pandas
+altair
+torch
+numpy
+scipy
+python-dotenv
+transformers
+youtube-transcript-api>=0.6.2
+google-api-python-client>=2.0.0
+google-generativeai 
