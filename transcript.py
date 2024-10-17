@@ -1,8 +1,14 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
 
-key="AIzaSyDjsNjiubGnjk3dxpBdHoY6b3qQ9W26EKE"
+load_dotenv()
+
+key = os.getenv("API_KEY_T")
+
+
 
 class Description:
     def __init__(self,transcripted,prompted):

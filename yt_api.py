@@ -1,9 +1,14 @@
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+import os
+from dotenv import load_dotenv
 
-api_key = 'AIzaSyB0gTkqh5TE0uUBGwt6vUW211pAFnT6p-s'
+
+load_dotenv()
+api_key = os.getenv("API_KEY_Y")
 
 def video_comments(video_id):
+
     all_comments = []
     
     try:
