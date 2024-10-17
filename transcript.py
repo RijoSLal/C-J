@@ -3,12 +3,8 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
-
 key = os.getenv("API_KEY_T")
-
-
 
 class Description:
     def __init__(self,transcripted,prompted):
