@@ -6,21 +6,16 @@ from dotenv import load_dotenv
 load_dotenv()
 key = os.getenv("API_KEY_T")
 
-class Description:
-    def __init__(self,transcripted,prompted):
-        self.transcripted=transcripted
-        self.prompted=prompted
-
-    def idea(self):
-        if self.transcripted is not None:
-            try:
-                genai.configure(api_key=key)
-                model = genai.GenerativeModel("gemini-1.5-flash")
-                response = model.generate_content(f"{self.prompted+self.transcripted}")
-                return response.text
-            except Exception:
-                return f"Oops, something went wrong"
-        return "Please share the video link, and I'll create a brief summary"
+def idea(tr,scr):
+    if tr is not None:
+        try:
+            genai.configure(api_key=key)
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            response = model.generate_content(f"{scr+tr}")
+            return response.text
+        except Exception:
+            return f"Oops, something went wrong"
+    return "Please share the video link, and I'll create a brief description"
 
 
 
@@ -44,8 +39,7 @@ def transcripted_data(prompt):
     trans=extract_transcript_details(prompt)
     script="""You are Yotube video summarizer. You will be taking the transcript text
     and summarizing the entire video within 100 words. Please provide the summary of the text given here:  """
-    describe = Description(trans,script)
-    talk = describe.idea()
+    talk = idea(trans,script)
     return talk
 
         
