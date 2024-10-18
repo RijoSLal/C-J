@@ -140,5 +140,7 @@ def final(prompt,color):
 
 if __name__=="__main__":
     prompt = st.chat_input("𝙸𝚗𝚜𝚎𝚛𝚝 𝙻𝚒𝚗𝚔")
-    final(prompt,"blue")
+    if prompt:
+        st.legacy_caching.clear_cache()
+        final(prompt, "blue")
 
