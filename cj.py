@@ -127,7 +127,6 @@ class display:
             
 
 def final(prompt,color):
-    st.cache_data.clear()
     prog=Progress()
     prog.progress(100,"Loading",color)
     mode=module(prompt)
