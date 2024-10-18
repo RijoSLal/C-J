@@ -131,8 +131,8 @@ def final(prompt,color):
     prog=Progress()
     prog.progress(100,"Loading",color)
     mode=module(prompt)
-    talk=transcript.transcripted_data(prompt)
     lines=mode.dictionary()
+    talk=transcript.transcripted_data(prompt)
     dis=display(prog,lines,talk)
     dis.get_chart_19651()
 
