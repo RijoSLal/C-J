@@ -7,13 +7,14 @@ import streamlit as st
 
 key = st.secrets["api_keys"]["API_KEY_T"]
 
-def idea(tr,scr):
-    
+def idea(tr):
+    script="""You are Yotube video summarizer. You will be taking the transcript text
+    and summarizing the entire video within 100 words. Please provide the summary of the text given here:  """
     if tr is not None:
         try:
             genai.configure(api_key=key)
             model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(f"{scr+tr}")
+            response = model.generate_content(f"{script+tr}")
             return response.text
         except Exception:
             return f"Oops, something went wrong"
@@ -50,9 +51,7 @@ def extract_transcript_details(youtube_video_url):
 
 def transcripted_data(prompt):
     trans=extract_transcript_details(prompt)
-    script="""You are Yotube video summarizer. You will be taking the transcript text
-    and summarizing the entire video within 100 words. Please provide the summary of the text given here:  """
-    talk = idea(trans,script)
+    talk = idea(trans)
     return talk
 
         
