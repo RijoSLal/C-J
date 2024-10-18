@@ -5,9 +5,10 @@ from dotenv import load_dotenv
 import streamlit as st
 
 
-key = st.secrets["api_keys"]["API_KEY_T"]
+
 
 def idea(tr,scr):
+    key = st.secrets["api_keys"]["API_KEY_T"]
     if tr is not None:
         try:
             genai.configure(api_key=key)
