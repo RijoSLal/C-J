@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 import streamlit as st
 
 
-
+api_key = st.secrets["api_keys"]["API_KEY_Y"]
 
 def video_comments(video_id):
-    api_key = st.secrets["api_keys"]["API_KEY_Y"]
+  
     all_comments = []
     
     try:
