@@ -35,7 +35,7 @@ def extract_transcript_details(youtube_video_url):
         return transcript
 
     except Exception:
-        return None
+        return ""
 
 def transcripted_data(prompt):
     trans=extract_transcript_details(prompt)
