@@ -22,20 +22,31 @@ def idea(tr,scr):
 
 
 
+# def extract_transcript_details(youtube_video_url):
+#     try:
+#         video_id=youtube_video_url.split("=")[1]
+        
+#         transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
+
+#         transcript = ""
+#         for i in transcript_text:
+#             transcript += " " + i["text"]
+
+#         return transcript
+
+#     except Exception:
+#         return ""
+
+
 def extract_transcript_details(youtube_video_url):
     try:
-        video_id=youtube_video_url.split("=")[1]
-        
-        transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
-
-        transcript = ""
-        for i in transcript_text:
-            transcript += " " + i["text"]
-
+        video_id = youtube_video_url.split("v=")[-1].split("&")[0]
+        transcript_text = YouTubeTranscriptApi.get_transcript(video_id)
+        transcript = " ".join([i["text"] for i in transcript_text])
         return transcript
 
-    except Exception:
-        return ""
+    except Exception as e:
+        return None
 
 def transcripted_data(prompt):
     trans=extract_transcript_details(prompt)
