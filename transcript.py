@@ -2,9 +2,10 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import streamlit as st
 
-load_dotenv()
-key = os.getenv("API_KEY_T")
+
+key = st.secrets["api_keys"]["API_KEY_T"]
 
 def idea(tr,scr):
     if tr is not None:
