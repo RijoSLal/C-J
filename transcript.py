@@ -9,15 +9,15 @@ key = st.secrets["api_keys"]["API_KEY_T"]
 
 def idea(tr,scr):
     
-    if tr is not None:
-        try:
-            genai.configure(api_key=key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(f"{scr+tr}")
-            return response.text
-        except Exception:
-            return f"Oops, something went wrong"
-    return "Please share the video link, and I'll create a brief description"
+    # if tr is not None:
+    try:
+        genai.configure(api_key=key)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        response = model.generate_content(f"{scr+tr}")
+        return response.text
+    except Exception:
+        return f"Oops, something went wrong"
+    # return "Please share the video link, and I'll create a brief description"
 
 
 
