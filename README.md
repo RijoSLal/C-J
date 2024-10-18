@@ -1,4 +1,4 @@
-# Comment and Journal (CJ)
+# Comment & Journal (CJ)
 
 ## Overview
 
