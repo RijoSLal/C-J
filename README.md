@@ -75,5 +75,5 @@ Contributions to the project are welcome. If you would like to contribute, pleas
 - [Altair](https://altair-viz.github.io/)
 - [YouTube API](https://developers.google.com/youtube/v3)
 - [Hugging Face Transformers](https://huggingface.co/docs/transformers)
-- [Gemini API](https://yourgeminiapi.com/) (or replace with the appropriate link)
+- [Gemini API](https://yourgeminiapi.com/)
 
