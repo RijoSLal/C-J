@@ -122,8 +122,8 @@ class display:
                     self.prog.dummy(50, label, color)
                 else:
                     self.prog.progress(value, label, color)
-            st.write("𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗")
-            st.markdown(f'<p style="font-size: 14px; color: white; font-family: Courier New;">{self.talk}</p>', unsafe_allow_html=True)
+            # st.write("𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗")
+            # st.markdown(f'<p style="font-size: 14px; color: white; font-family: Courier New;">{self.talk}</p>', unsafe_allow_html=True)
             
 
 def final(prompt,color):
