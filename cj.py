@@ -127,6 +127,7 @@ class display:
             
 
 def final(prompt,color):
+    st.cache_data.clear()
     prog=Progress()
     prog.progress(100,"Loading",color)
     mode=module(prompt)
@@ -140,7 +141,5 @@ def final(prompt,color):
 
 if __name__=="__main__":
     prompt = st.chat_input("𝙸𝚗𝚜𝚎𝚛𝚝 𝙻𝚒𝚗𝚔")
-    if prompt:
-        st.legacy_caching.clear_cache()
-        final(prompt, "blue")
+    final(prompt, "blue")
 
