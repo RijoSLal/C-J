@@ -2,10 +2,10 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 import os
 from dotenv import load_dotenv
+import streamlit as st
 
 
-load_dotenv()
-api_key = os.getenv("API_KEY_Y")
+api_key = st.secrets["api_keys"]["API_KEY_Y"]
 
 def video_comments(video_id):
 
