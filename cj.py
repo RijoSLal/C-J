@@ -129,10 +129,10 @@ class display:
 def final(prompt,color):
     prog=Progress()
     prog.progress(100,"Loading",color)
+    talks=transcript.transcripted_data(prompt)
     mode=module(prompt)
     lines=mode.dictionary()
-    talk=transcript.transcripted_data(prompt)
-    dis=display(prog,lines,talk)
+    dis=display(prog,lines,talks)
     dis.get_chart_19651()
 
 
