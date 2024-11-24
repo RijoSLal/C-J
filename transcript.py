@@ -1,17 +1,14 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
-import os
-from dotenv import load_dotenv
+import re
 import streamlit as st
-
-
-key = st.secrets["api_keys"]["API_KEY_T"]
 
 def idea(tr):
     script="""You are Yotube video summarizer. You will be taking the transcript text
     and summarizing the entire video within 100 words. Please provide the summary of the text given here:  """
     if tr is not None:
         try:
+            key = st.secrets["api_keys"]["API_KEY_T"]
             genai.configure(api_key=key)
             model = genai.GenerativeModel("gemini-1.5-flash")
             response = model.generate_content(f"{script+tr}")
@@ -21,11 +18,21 @@ def idea(tr):
     return "Please share the video link, and I'll create a brief description"
 
 
+def extract_video_id(url):
+   
+    regex = (
+        r'(?:https?://)?(?:www\.)?(?:youtube\.com/(?:watch\?v=|embed/|v/|shorts/|.+\?v=)|youtu\.be/)' +
+        r'([a-zA-Z0-9_-]{11})'
+    )
+    match = re.search(regex, url)
+    if match:
+        return match.group(1)  
+    return None
 
 
 def extract_transcript_details(youtube_video_url):
     try:
-        video_id=youtube_video_url.split("=")[1]
+        video_id=extract_video_id(youtube_video_url)
         
         transcript_text=YouTubeTranscriptApi.get_transcript(video_id)
 
@@ -39,15 +46,6 @@ def extract_transcript_details(youtube_video_url):
         return None
 
 
-# def extract_transcript_details(youtube_video_url):
-#     try:
-#         video_id = youtube_video_url.split("v=")[-1].split("&")[0]
-#         transcript_text = YouTubeTranscriptApi.get_transcript(video_id)
-#         transcript = " ".join([i["text"] for i in transcript_text])
-#         return transcript
-
-#     except Exception as e:
-#         return None
 
 def transcripted_data(prompt):
     trans=extract_transcript_details(prompt)
