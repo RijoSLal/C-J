@@ -6,8 +6,9 @@ from transformers import pipeline
 def idea(tr):
     if tr is not None:
         try:
-           summarizer = pipeline("summarization", model="facebook/bart-large-cnn")  
-           return summarizer(tr, max_length=130, min_length=30, do_sample=False)[0]["summary_text"]
+            summarizer = pipeline("summarization", model="facebook/bart-large-cnn")  
+            summary = summarizer(tr, max_length=130, min_length=30, do_sample=False)
+            return summary[0]["summary_text"]
         except Exception:
             return f"Oops, something went wrong"
     return "Please share the video link, and I'll create a brief description"
