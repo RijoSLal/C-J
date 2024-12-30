@@ -1,5 +1,4 @@
 from youtube_transcript_api import YouTubeTranscriptApi
-import google.generativeai as genai
 import re
 import streamlit as st
 from transformers import pipeline
