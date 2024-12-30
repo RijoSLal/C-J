@@ -2,20 +2,17 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
 import re
 import streamlit as st
+from transformers import pipeline
 
 def idea(tr):
-    script="""You are Yotube video summarizer. You will be taking the transcript text
-    and summarizing the entire video within 100 words. Please provide the summary of the text given here:  """
     if tr is not None:
         try:
-            key = st.secrets["api_keys"]["API_KEY_T"]
-            genai.configure(api_key=key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(f"{script+tr}")
-            return response.text
+           summarizer = pipeline("summarization", model="facebook/bart-large-cnn")  
+           summarizer(tr, max_length=130, min_length=30, do_sample=False)[0]["summary_text"]
         except Exception:
             return f"Oops, something went wrong"
     return "Please share the video link, and I'll create a brief description"
+
 
 
 def extract_video_id(url):
