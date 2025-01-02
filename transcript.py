@@ -1,18 +1,50 @@
+
 from youtube_transcript_api import YouTubeTranscriptApi
 import re
 import streamlit as st
-from transformers import pipeline
+from transformers import LEDTokenizer, LEDForConditionalGeneration
+import torch
 
+model_name = "allenai/led-base-16384"  
+tokenizer = LEDTokenizer.from_pretrained(model_name)
+model = LEDForConditionalGeneration.from_pretrained(model_name)
+
+
+model.gradient_checkpointing_enable()
 
 def idea(tr):
-    if tr is not None:
-        try:
-            summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-            summary = summarizer(tr, max_length=130, min_length=30, do_sample=False)
-            return summary[0]["summary_text"]
-        except Exception:
-            return f"Oops, something went wrong"
-    return "Please share the video link, and I'll create a brief description"
+   
+    if tr is None or not tr.strip():
+        return "Please share the video link, and I'll create a brief description."
+    
+    try:
+        
+        inputs = tokenizer(
+            tr,
+            return_tensors="pt",
+            max_length=4096,  
+            truncation=True
+        )
+        
+     
+        global_attention_mask = torch.zeros_like(inputs['input_ids'])
+        global_attention_mask[:, 0] = 1
+        
+     
+        summary_ids = model.generate(
+            inputs['input_ids'],
+            global_attention_mask=global_attention_mask,
+            num_beams=4,
+            max_length=150, 
+            early_stopping=True
+        )
+        
+        summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+        return summary
+    
+    except Exception as e:
+        return f"Oops, something went wrong: {str(e)}"
+
 
 
 

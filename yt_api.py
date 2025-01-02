@@ -21,8 +21,8 @@ def video_comments(video_id):
     all_comments = []
 
     try:
-        api_key = st.secrets["api_keys"]["API_KEY_Y"]
-        youtube = build('youtube', 'v3', developerKey=api_key)
+        # api_key = st.secrets["api_keys"]["AIzaSyB0gTkqh5TE0uUBGwt6vUW211pAFnT6p-s"]
+        youtube = build('youtube', 'v3', developerKey="AIzaSyB0gTkqh5TE0uUBGwt6vUW211pAFnT6p-s")
         video_response = youtube.commentThreads().list(
             part='snippet',
             videoId=video_id,
